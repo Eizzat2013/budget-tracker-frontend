@@ -1,47 +1,87 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Budget Tracker</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
 </head>
-<body class="semi-dark">
+<body>
   <div class="container">
     <header>
       <h1>Budget Tracker</h1>
-      <div id="summary"></div>
+      <button id="toggleTheme">Toggle Dark/Light Mode</button>
     </header>
 
-    <section id="controls">
-      <form id="expenseForm">
-        <input type="date" id="date" required />
-        <input type="text" id="category" placeholder="Category" required />
-        <input type="number" step="0.01" id="amount" placeholder="Amount" required />
-        <input type="text" id="notes" placeholder="Notes" />
-        <input type="file" id="receiptFile" accept="image/*" />
-        <button type="submit">Add</button>
-      </form>
-      <button id="ocrButton">Use Receipt OCR</button>
+    <!-- Input Section -->
+    <section class="input-section">
+      <h2>Add Transaction</h2>
+      <div class="form-row">
+        <input type="text" id="desc" placeholder="Description">
+        <input type="number" id="amount" placeholder="Amount">
+        <select id="category">
+          <option value="Food">Food</option>
+          <option value="Bills">Bills</option>
+          <option value="Salary">Salary</option>
+          <option value="Others">Others</option>
+        </select>
+        <select id="type">
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+        <input type="date" id="date">
+        <button id="addBtn">Add</button>
+      </div>
     </section>
 
-    <section id="charts">
-      <canvas id="pieChart"></canvas>
-      <canvas id="lineChart"></canvas>
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+      <h2>Dashboard</h2>
+      <div class="cards">
+        <div class="card">Total Income: <span id="totalIncome">0</span></div>
+        <div class="card">Total Expenses: <span id="totalExpenses">0</span></div>
+        <div class="card">Wallet Balance: <span id="balance">0</span></div>
+        <div class="card">Largest Spending Day: <span id="largestDay">-</span></div>
+        <div class="card">Average Daily Usage: <span id="averageDaily">0</span></div>
+        <div class="card">Carry Forward: <span id="carryForward">0</span></div>
+      </div>
+
+      <canvas id="pieChart" width="400" height="300"></canvas>
+      <canvas id="lineChart" width="400" height="300"></canvas>
     </section>
 
-    <section id="tableWrap">
-      <select id="monthSelect"></select>
-      <button id="compareBtn">Compare Months</button>
-      <table id="expenseTable"><thead><tr><th>Date</th><th>Category</th><th>Amount</th><th>Notes</th><th>Action</th></tr></thead><tbody></tbody></table>
-    </section>
-
-    <section id="analysis">
-      <h3>Analysis</h3>
-      <div id="analysisText"></div>
+    <!-- Records Section -->
+    <section class="records">
+      <h2>Transactions</h2>
+      <div class="filter-row">
+        <input type="text" id="searchDesc" placeholder="Search description">
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+          <option value="Food">Food</option>
+          <option value="Bills">Bills</option>
+          <option value="Salary">Salary</option>
+          <option value="Others">Others</option>
+        </select>
+        <input type="date" id="filterDate">
+        <button id="clearFilters">Clear</button>
+      </div>
+      <table id="transactionsTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
