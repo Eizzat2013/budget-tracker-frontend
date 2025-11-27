@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Budget Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+</head>
+<body class="semi-dark">
+  <div class="container">
+    <header>
+      <h1>Budget Tracker</h1>
+      <div id="summary"></div>
+    </header>
+
+    <section id="controls">
+      <form id="expenseForm">
+        <input type="date" id="date" required />
+        <input type="text" id="category" placeholder="Category" required />
+        <input type="number" step="0.01" id="amount" placeholder="Amount" required />
+        <input type="text" id="notes" placeholder="Notes" />
+        <input type="file" id="receiptFile" accept="image/*" />
+        <button type="submit">Add</button>
+      </form>
+      <button id="ocrButton">Use Receipt OCR</button>
+    </section>
+
+    <section id="charts">
+      <canvas id="pieChart"></canvas>
+      <canvas id="lineChart"></canvas>
+    </section>
+
+    <section id="tableWrap">
+      <select id="monthSelect"></select>
+      <button id="compareBtn">Compare Months</button>
+      <table id="expenseTable"><thead><tr><th>Date</th><th>Category</th><th>Amount</th><th>Notes</th><th>Action</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section id="analysis">
+      <h3>Analysis</h3>
+      <div id="analysisText"></div>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
